@@ -3,13 +3,16 @@ const MissingParamError = require("../helpers/missing-param-error");
 
 const makeSut = () => {
    class AuthUseCase {
-      auth() {}
+      auth(email, password) {
+         this.email = email;
+         this.password = password;
+      }
    }
-   const authUseCase = new AuthUseCase();
-   const sut = new LoginRouter(authUseCase);
+   const authUseCaseSpy = new AuthUseCase();
+   const sut = new LoginRouter(authUseCaseSpy);
    return {
       sut,
-      authUseCase,
+      authUseCaseSpy,
    };
 };
 
@@ -50,7 +53,7 @@ describe("Login Router", () => {
    });
 
    test("should call AuthUseCase with correct params", () => {
-      const { sut, authUseCase } = makeSut();
+      const { sut, authUseCaseSpy } = makeSut();
       const httpRequest = {
          body: {
             email: "any_email@mail.com",
@@ -58,6 +61,7 @@ describe("Login Router", () => {
          },
       };
       sut.route(httpRequest);
-      expect(authUseCase.email).toBe(httpRequest.body.email);
+      expect(authUseCaseSpy.email).toBe(httpRequest.body.email);
+      expect(authUseCaseSpy.password).toBe(httpRequest.body.password);
    });
 });
