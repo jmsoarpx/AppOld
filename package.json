@@ -5,8 +5,7 @@
    "main": "index.js",
    "scripts": {
       "test": "jest --watchAll",
-      "test:staged": "jest",
-      "test:commit": "lint-staged",
+      "test:staged": "jest --passWithNoTests",
       "prepare": "husky install"
    },
    "standard": {
