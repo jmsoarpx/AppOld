@@ -1,84 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1679690312331" clover="3.2.0">
-  <project timestamp="1679690312331" name="All files">
-    <metrics statements="57" coveredstatements="57" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6" elements="63" coveredelements="63" complexity="0" loc="57" ncloc="57" packages="2" files="5" classes="5"/>
-    <package name="helpers">
-      <metrics statements="24" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
-      <file name="invalid-param-error.js" path="C:\Projetos\FisioApp\src\presentation\helpers\invalid-param-error.js">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-      <file name="missing-param-error.js" path="C:\Projetos\FisioApp\src\presentation\helpers\missing-param-error.js">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="4" type="stmt"/>
-        <line num="4" count="4" type="stmt"/>
-        <line num="5" count="4" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-      <file name="server-error.js" path="C:\Projetos\FisioApp\src\presentation\helpers\server-error.js">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="14" type="stmt"/>
-        <line num="4" count="14" type="stmt"/>
-        <line num="5" count="14" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-      <file name="unauthorized-error.js" path="C:\Projetos\FisioApp\src\presentation\helpers\unauthorized-error.js">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="routes">
-      <metrics statements="33" coveredstatements="33" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="login-router.js" path="C:\Projetos\FisioApp\src\presentation\routes\login-router.js">
-        <metrics statements="33" coveredstatements="33" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="15" type="stmt"/>
-        <line num="8" count="15" type="stmt"/>
-        <line num="9" count="15" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="19" type="stmt"/>
-        <line num="13" count="19" type="stmt"/>
-        <line num="14" count="19" type="stmt"/>
-        <line num="15" count="19" type="stmt"/>
-        <line num="16" count="19" type="stmt"/>
-        <line num="17" count="19" type="stmt"/>
-        <line num="18" count="19" type="stmt"/>
-        <line num="19" count="19" type="stmt"/>
-        <line num="20" count="19" type="stmt"/>
-        <line num="21" count="19" type="stmt"/>
-        <line num="22" count="19" type="stmt"/>
-        <line num="23" count="19" type="stmt"/>
-        <line num="24" count="19" type="stmt"/>
-        <line num="25" count="19" type="stmt"/>
-        <line num="26" count="19" type="stmt"/>
-        <line num="27" count="19" type="stmt"/>
-        <line num="28" count="19" type="stmt"/>
-        <line num="29" count="19" type="stmt"/>
-        <line num="30" count="19" type="stmt"/>
-        <line num="31" count="19" type="stmt"/>
-        <line num="32" count="19" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-      </file>
-    </package>
+<coverage generated="1679690415301" clover="3.2.0">
+  <project timestamp="1679690415301" name="All files">
+    <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0" elements="12" coveredelements="0" complexity="0" loc="8" ncloc="8" packages="1" files="2" classes="2"/>
+    <file name="jest-integration-config.js" path="C:\Projetos\FisioApp\jest-integration-config.js">
+      <metrics statements="4" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="2" count="0" type="stmt"/>
+      <line num="3" count="0" type="stmt"/>
+      <line num="4" count="0" type="stmt"/>
+    </file>
+    <file name="jest-unit-config.js" path="C:\Projetos\FisioApp\jest-unit-config.js">
+      <metrics statements="4" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="2" count="0" type="stmt"/>
+      <line num="3" count="0" type="stmt"/>
+      <line num="4" count="0" type="stmt"/>
+    </file>
   </project>
 </coverage>
