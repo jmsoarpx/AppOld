@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1679690415301" clover="3.2.0">
-  <project timestamp="1679690415301" name="All files">
-    <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0" elements="12" coveredelements="0" complexity="0" loc="8" ncloc="8" packages="1" files="2" classes="2"/>
-    <file name="jest-integration-config.js" path="C:\Projetos\FisioApp\jest-integration-config.js">
-      <metrics statements="4" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
-      <line num="2" count="0" type="stmt"/>
-      <line num="3" count="0" type="stmt"/>
-      <line num="4" count="0" type="stmt"/>
-    </file>
-    <file name="jest-unit-config.js" path="C:\Projetos\FisioApp\jest-unit-config.js">
-      <metrics statements="4" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
-      <line num="2" count="0" type="stmt"/>
-      <line num="3" count="0" type="stmt"/>
-      <line num="4" count="0" type="stmt"/>
-    </file>
+<coverage generated="1679691851138" clover="3.2.0">
+  <project timestamp="1679691851139" name="All files">
+    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
   </project>
 </coverage>
