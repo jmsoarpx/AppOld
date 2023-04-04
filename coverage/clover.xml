@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1680578323173" clover="3.2.0">
-  <project timestamp="1680578323173" name="All files">
+<coverage generated="1680578803990" clover="3.2.0">
+  <project timestamp="1680578803991" name="All files">
     <metrics statements="32" coveredstatements="32" conditionals="10" coveredconditionals="10" methods="2" coveredmethods="2" elements="44" coveredelements="44" complexity="0" loc="32" ncloc="32" packages="2" files="2" classes="2"/>
     <package name="domain.usecases">
       <metrics statements="25" coveredstatements="25" conditionals="10" coveredconditionals="10" methods="2" coveredmethods="2"/>
@@ -10,21 +10,21 @@
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="5" count="10" type="stmt"/>
-        <line num="6" count="10" type="stmt"/>
-        <line num="7" count="10" type="stmt"/>
-        <line num="8" count="10" type="stmt"/>
+        <line num="5" count="11" type="stmt"/>
+        <line num="6" count="11" type="stmt"/>
+        <line num="7" count="11" type="stmt"/>
+        <line num="8" count="11" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="11" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="11" type="cond" truecount="1" falsecount="0"/>
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="14" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="11" type="cond" truecount="1" falsecount="0"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="17" count="8" type="stmt"/>
-        <line num="18" count="10" type="cond" truecount="2" falsecount="0"/>
-        <line num="19" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="9" type="stmt"/>
+        <line num="18" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="11" type="cond" truecount="1" falsecount="0"/>
         <line num="20" count="4" type="stmt"/>
         <line num="21" count="4" type="stmt"/>
         <line num="22" count="4" type="cond" truecount="1" falsecount="0"/>
