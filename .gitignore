@@ -1,9 +1,18 @@
 node_modules
 # Ignore test-related files
+coverage
+coverage/*
 /coverage.data
 /coverage/
 coverage/clover.xml
 coverage/clover.xml
 coverage/coverage-final.json
 coverage/lcov.info
+coverage/lcov-report/index.html
+.\coverage\
+cover/
+.coverage
+coverage.xml
+.\coverage\
+coverage/clover.xml
 coverage/lcov-report/index.html
