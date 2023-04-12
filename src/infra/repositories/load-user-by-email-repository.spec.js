@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb')
-
+const LoadUserByEmailRepository = require('./load-user-by-email-repository')
 let client, db
+
 const mockUser = {
   _id: 'any_id',
   email: 'valid_email@mail.com',
@@ -8,23 +9,6 @@ const mockUser = {
   idade: 35,
   state: 'any_state',
   password: 'hashed_password'
-}
-class LoadUserByEmailRepository {
-  constructor (userModel) {
-    this.userModel = userModel
-  }
-
-  async load (email) {
-    const user = await this.userModel.findOne(
-      { email },
-      {
-        projection: {
-          password: 1
-        }
-      }
-    )
-    return user
-  }
 }
 
 const makeSut = () => {
