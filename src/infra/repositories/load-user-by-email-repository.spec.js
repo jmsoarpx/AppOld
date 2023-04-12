@@ -4,7 +4,6 @@ const LoadUserByEmailRepository = require('./load-user-by-email-repository')
 let db
 
 const mockUser = {
-  _id: 'any_id',
   email: 'valid_email@mail.com',
   name: 'any_name',
   idade: 35,
@@ -28,7 +27,7 @@ describe('LoadUserByEmail Repository', () => {
   })
 
   beforeEach(async () => {
-    await db.collection('user').deleteMany({})
+    await db.collection('users').deleteMany({})
   })
 
   afterAll(async () => {

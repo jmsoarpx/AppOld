@@ -1,7 +1,6 @@
 const MongoHelper = require('../helpers/mongo-helper')
 let db
 const mockUser = {
-  _id: 'any_id',
   email: 'valid_email@mail.com',
   name: 'any_name',
   idade: 35,
@@ -35,7 +34,7 @@ describe('UpdateAccessToken Repository', () => {
   })
 
   beforeEach(async () => {
-    await db.collection('user').deleteMany({})
+    await db.collection('users').deleteMany({})
   })
 
   afterAll(async () => {
@@ -49,5 +48,13 @@ describe('UpdateAccessToken Repository', () => {
     await sut.update(mockUser._id, 'valid_token')
     const updateFakerUser = await userModel.findOne({ _id: mockUser._id })
     expect(updateFakerUser.accessToken).toBe('valid_token')
+  })
+
+  test('Should throw if no userModel is provided', async () => {
+    const sut = new UpdateAccessTokenRepository()
+    const userModel = db.collection('users')
+    await userModel.insertOne(mockUser)
+    const promise = sut.update(mockUser._id, 'valid_token')
+    expect(promise).rejects.toThrow()
   })
 })
