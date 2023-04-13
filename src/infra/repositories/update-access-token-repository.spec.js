@@ -34,7 +34,7 @@ describe('UpdateAccessToken Repository', () => {
     await MongoHelper.disconnect()
   })
 
-  test('Should update the user with the diven accessToken', async () => {
+  test('Should update the user with the given accessToken', async () => {
     const { sut, userModel } = makeSut()
     await userModel.insertOne(mockUser)
     await sut.update(mockUser._id, 'valid_token')
