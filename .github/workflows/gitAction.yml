@@ -135,7 +135,6 @@ jobs:
             Release de ${{ github.ref_name }}
             - Testes: ${{ steps.test.outcome }}
             - Build: ${{ steps.build.outcome }}
-            - Check Code: ${{ steps.check-code.outcome }}
           draft: false
           prerelease: false
 
