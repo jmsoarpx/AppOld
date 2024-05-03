@@ -8,6 +8,29 @@ on:
       - "v*"
 
 jobs:
+  Approve-Deployment:
+    runs-on: windows-latest
+    needs: Continuos-Integration
+    environment:
+      name: Produção
+
+    steps:
+      - name: Request Manual Approval
+        id: request_approval
+        uses: wei/capture-input-action@v1
+        with:
+          prompt: "Do you want to approve the deployment?"
+          pattern: "^(yes|no)$"
+          default: "no"
+      - name: Check Approval
+        run: |
+          if [ "${{ steps.request_approval.outputs.input }}" == "yes" ]; then
+            echo "Approved"
+          else
+            echo "Not Approved"
+            exit 1
+          fi
+
   Continuos-Integration:
     runs-on: windows-latest
     environment:
@@ -87,26 +110,3 @@ jobs:
 
             Atenciosamente,
             Julio Mendes
-
-  Approve-Deployment:
-    runs-on: windows-latest
-    needs: Continuos-Integration
-    environment:
-      name: Produção
-
-    steps:
-      - name: Request Manual Approval
-        id: request_approval
-        uses: wei/capture-input-action@v1
-        with:
-          prompt: "Do you want to approve the deployment?"
-          pattern: "^(yes|no)$"
-          default: "no"
-      - name: Check Approval
-        run: |
-          if [ "${{ steps.request_approval.outputs.input }}" == "yes" ]; then
-            echo "Approved"
-          else
-            echo "Not Approved"
-            exit 1
-          fi
