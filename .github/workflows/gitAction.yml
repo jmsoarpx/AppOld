@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Request Manual Approval
         id: request_approval
-        uses: wei/capture-input-action@v1
+        uses: actions/github-script@v3
         with:
           prompt: "Do you want to approve the deployment?"
           pattern: "^(yes|no)$"
