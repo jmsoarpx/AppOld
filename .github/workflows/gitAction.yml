@@ -8,19 +8,19 @@ jobs:
       name: Desenvolvimento
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 18.
       - name: Install Dependencies
         continue-on-error: true
         id: install-dependencies
-        run: npm install
+        run: npm ci
 
       - name: Execute tests
         continue-on-error: true
-        id: testes
+        id: test
         run: npm run testes
 
       - name: Execute build
@@ -39,6 +39,16 @@ jobs:
           release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: fals
+
+      - name: Anexar Artefato ao Release
+        uses: actions/upload-release-asset@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.PAT }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path:  ./.github/workflows/artefato.zip
+            asset_name: artefato.zip
+            asset_content_type: application/zip
 
       - name: Enviar Email
         if: steps.install-dependencies.outcome == 'failure' || steps.test.outcome == 'failure' || steps.build.outcome == 'failure' || steps.create_release.outcome == 'failure'
