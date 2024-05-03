@@ -23,20 +23,45 @@ jobs:
         id: test
         run: npm run testes
 
+      - name: Enviar Email
+        if: steps.test.outcome == 'failure'
+        uses: hilarion5/send-mail@v1
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Falha no Pipeline de CI/CD - ${{ github.repository }} - ${{ github.run_id }}
+          to: julio_soares_mendes@hotmail.com
+          from: b4r7y@hotmail.com
+          body: |
+            O pipeline de CI/CD falhou na etapa "${{ steps.failed[0].name }}".
+            Acesse o log para mais detalhes: ${{ runner.url }}/log/${{ github.run_id }}
+
       - name: Execute build
         continue-on-error: true
         id: build
         run: npm run start
 
-      - name: Criar Release
+      - name: Check Code
+        continue-on-error: true
+        id: check-code
+        uses: actions/check-code@v2
+
+      - name: Create Release
         id: create_release
         continue-on-error: true
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          body: |
+            Release de ${{ github.ref_name }}
+            - Testes: ${{ steps.test.outcome }}
+            - Build: ${{ steps.build.outcome }}
+            - Check Code: ${{ steps.check-code.outcome }}
           draft: false
           prerelease: fals
 
@@ -52,10 +77,10 @@ jobs:
 
       - name: Enviar Email
         if: steps.install-dependencies.outcome == 'failure' || steps.test.outcome == 'failure' || steps.build.outcome == 'failure' || steps.create_release.outcome == 'failure'
-        uses: dawidd6/action-send-mail@v2
+        uses: hilarion5/send-mail@v1
         with:
-          server_address: smtp.office365.com
-          server_port: 587
+          server_address: smtp.gmail.com
+          server_port: 465
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: Falha no Pipeline de CI/CD - ${{ github.repository }} - ${{ github.run_id }}
