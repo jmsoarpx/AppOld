@@ -14,5 +14,20 @@ jobs:
       - name: Install Dependencies and Execute tests and build
         run: |
           npm install
-          npm run build
           npm run testteste:integration
+          npm run build
+      - name: Create Release and Aprove
+        uses: github/request-environment@v3
+        with:
+          repository: ${{ github.repository }}
+          branch: ${{ github.ref }}
+          environment: production
+          revireviewer: "jmsoarpx"
+      - name: Notificar Desenvolvedor por Email (em caso de falha)
+        uses: notify/email@v1
+        with:
+          to: julio_soares_mendes@hotmail.com
+          subject: Falha no Pipeline de CI/CD - ${{ github.repository }}
+          body: |
+            O pipeline de CI/CD falhou na etapa "${{ job.status }}".
+            Acesse o log para mais detalhes: ${{ github.run_url }}/log
