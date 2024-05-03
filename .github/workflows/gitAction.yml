@@ -17,12 +17,13 @@ jobs:
           npm run testteste:integration
           npm run build
       - name: Create Release and Aprove
-        uses: github/request-environment@v3
+        uses: github/create-release@v3
         with:
-          repository: ${{ github.repository }}
-          branch: ${{ github.ref }}
-          environment: production
-          revireviewer: "jmsoarpx"
+          tag_name: ${{ github.event.release.tag_name }}
+          release_name: ${{ github.event.release.tag_name }}
+          body: |
+            Descrição da release
+          draft: true
       - name: Notificar Desenvolvedor por Email (em caso de falha)
         uses: notify/email@v1
         with:
