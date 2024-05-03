@@ -126,7 +126,7 @@ jobs:
 
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
-          zip -r site.zip .
+          Compress-Archive -Path . -DestinationPath site.zip
 
       - name: Create Release
         id: create_release
