@@ -38,11 +38,13 @@ jobs:
         if: steps.build.outcome == 'failure'
         uses: dawidd6/action-send-mail@v2
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
+          server_address: smtp.office365.com
+          server_port: 587
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: Erro no pipeline
-          to: destinatario@example.com
-          from: remetente@example.com
-          body: Ocorreu um erro na execução do pipeline.
+          subject: Falha no Pipeline de CI/CD - ${{ github.repository }} - ${{ github.run_id }}
+          to: julio_soares_mendes@hotmail.com
+          from: b4r7y@hotmail.com
+          body: |
+            O pipeline de CI/CD falhou na etapa "${{ steps.failed[0].name }}".
+            Acesse o log para mais detalhes: ${{ runner.url }}/log/${{ github.run_id }}
