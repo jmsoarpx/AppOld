@@ -16,7 +16,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.
+          node-version: 20.x
       - name: Install Dependencies
         continue-on-error: true
         id: install-dependencies
@@ -129,14 +129,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          tag_name: ${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
           body: |
             Release de ${{ github.ref_name }}
             - Testes: ${{ steps.test.outcome }}
             - Build: ${{ steps.build.outcome }}
-          draft: false
-          prerelease: false
 
       - name: Enviar Email
         if: steps.create_release.outcome == 'failure'
