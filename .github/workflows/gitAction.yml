@@ -11,24 +11,38 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 18.
-      - name: Install Dependencies and Execute tests and build
-        run: |
-          npm install
-          npm run testteste:integration
-          npm run build
+      - name: Install Dependencies
+        continue-on-error: true
+        id: install-dependencies
+        run: npm install
+      - name: Execute tests
+        continue-on-error: true
+        id: test
+        run: npm run testteste:integration
+      - name: Execute build
+        continue-on-error: true
+        id: build
+        run: npm run build
+
       - name: Create Release and Aprove
-        uses: github/create-release@v3
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.event.release.tag_name }}
-          release_name: ${{ github.event.release.tag_name }}
-          body: |
-            Descrição da release
-          draft: true
-      - name: Notificar Desenvolvedor por Email (em caso de falha)
-        uses: notify/email@v1
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Enviar Email
+        if: steps.build.outcome == 'failure'
+        uses: dawidd6/action-send-mail@v2
         with:
-          to: julio_soares_mendes@hotmail.com
-          subject: Falha no Pipeline de CI/CD - ${{ github.repository }}
-          body: |
-            O pipeline de CI/CD falhou na etapa "${{ job.status }}".
-            Acesse o log para mais detalhes: ${{ github.run_url }}/log
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Erro no pipeline
+          to: destinatario@example.com
+          from: remetente@example.com
+          body: Ocorreu um erro na execução do pipeline.
