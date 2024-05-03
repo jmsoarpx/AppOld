@@ -19,7 +19,7 @@ jobs:
       - name: Execute tests
         continue-on-error: true
         id: test
-        run: npm run teste:integration
+        run: npm run test
 
       - name: Execute build
         continue-on-error: true
