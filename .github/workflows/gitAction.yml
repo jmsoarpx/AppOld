@@ -15,10 +15,12 @@ jobs:
         continue-on-error: true
         id: install-dependencies
         run: npm install
+
       - name: Execute tests
         continue-on-error: true
         id: test
-        run: npm run testteste:integration
+        run: npm run teste:integration
+
       - name: Execute build
         continue-on-error: true
         id: build
