@@ -1,6 +1,10 @@
 name: Continuos Integration
 run-name: Proccess Git Push Request
-on: [push]
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   Continuos-Integration:
     runs-on: windows-latest
@@ -18,10 +22,40 @@ jobs:
         id: install-dependencies
         run: npm ci
 
+      - name: Enviar Email
+        if: steps.install-dependencies.outcome == 'failure'
+        uses: hilarion5/send-mail@v1
+        with:
+          smtp-server: smtp.gmail.com
+          smtp-port: 465
+          smtp-secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Falha no Pipeline de CI/CD - ${{ github.repository }} - ${{ github.run_id }}
+          to-email: julio_soares_mendes@hotmail.com
+          from-email: ${{ secrets.MAIL_USERNAME }}
+          body: |
+            Olá,
+
+            Ocorreu uma falha no pipeline de CI/CD do repositório ${{ github.repository }}.
+
+            Aqui estão alguns detalhes:
+
+            - ID da execução: ${{ github.run_id }}
+            - Ref do commit: ${{ github.ref }}
+            - SHA do commit: ${{ github.sha }}
+
+            Você pode visualizar mais detalhes sobre a falha acessando o log do pipeline: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Por favor, verifique o problema assim que possível.
+
+            Atenciosamente,
+            Julio Mendes
+
       - name: Execute tests
         continue-on-error: true
         id: test
-        run: npm run testes
+        run: npm run test
 
       - name: Enviar Email
         if: steps.test.outcome == 'failure'
@@ -36,13 +70,57 @@ jobs:
           to-email: julio_soares_mendes@hotmail.com
           from-email: ${{ secrets.MAIL_USERNAME }}
           body: |
-            O pipeline de CI/CD falhou na etapa "${{ steps.failed[0].name }}".
-            Acesse o log para mais detalhes: ${{ runner.url }}/log/${{ github.run_id }}
+            Olá,
+
+            Ocorreu uma falha no pipeline de CI/CD do repositório ${{ github.repository }}.
+
+            Aqui estão alguns detalhes:
+
+            - ID da execução: ${{ github.run_id }}
+            - Ref do commit: ${{ github.ref }}
+            - SHA do commit: ${{ github.sha }}
+
+            Você pode visualizar mais detalhes sobre a falha acessando o log do pipeline: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Por favor, verifique o problema assim que possível.
+
+            Atenciosamente,
+            Julio Mendes
 
       - name: Execute build
         continue-on-error: true
         id: build
         run: npm run start
+
+      - name: Enviar Email
+        if: steps.build.outcome == 'failure'
+        uses: hilarion5/send-mail@v1
+        with:
+          smtp-server: smtp.gmail.com
+          smtp-port: 465
+          smtp-secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Falha no Pipeline de CI/CD - ${{ github.repository }} - ${{ github.run_id }}
+          to-email: julio_soares_mendes@hotmail.com
+          from-email: ${{ secrets.MAIL_USERNAME }}
+          body: |
+            Olá,
+
+            Ocorreu uma falha no pipeline de CI/CD do repositório ${{ github.repository }}.
+
+            Aqui estão alguns detalhes:
+
+            - ID da execução: ${{ github.run_id }}
+            - Ref do commit: ${{ github.ref }}
+            - SHA do commit: ${{ github.sha }}
+
+            Você pode visualizar mais detalhes sobre a falha acessando o log do pipeline: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Por favor, verifique o problema assim que possível.
+
+            Atenciosamente,
+            Julio Mendes
 
       - name: Create Release
         id: create_release
@@ -59,7 +137,37 @@ jobs:
             - Build: ${{ steps.build.outcome }}
             - Check Code: ${{ steps.check-code.outcome }}
           draft: false
-          prerelease: fals
+          prerelease: false
+
+      - name: Enviar Email
+        if: steps.create_release.outcome == 'failure'
+        uses: hilarion5/send-mail@v1
+        with:
+          smtp-server: smtp.gmail.com
+          smtp-port: 465
+          smtp-secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Falha no Pipeline de CI/CD - ${{ github.repository }} - ${{ github.run_id }}
+          to-email: julio_soares_mendes@hotmail.com
+          from-email: ${{ secrets.MAIL_USERNAME }}
+          body: |
+            Olá,
+
+            Ocorreu uma falha no pipeline de CI/CD do repositório ${{ github.repository }}.
+
+            Aqui estão alguns detalhes:
+
+            - ID da execução: ${{ github.run_id }}
+            - Ref do commit: ${{ github.ref }}
+            - SHA do commit: ${{ github.sha }}
+
+            Você pode visualizar mais detalhes sobre a falha acessando o log do pipeline: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Por favor, verifique o problema assim que possível.
+
+            Atenciosamente,
+            Julio Mendes
 
       - name: Anexar Artefato ao Release
         uses: actions/upload-release-asset@v1
@@ -67,21 +175,36 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./.github/workflows/artefato.zip
-          asset_name: artefato.zip
+          asset_path: ./artefato.zip
+          asset_name: artefato-v${{  github.run_number }}.zip
           asset_content_type: application/zip
 
       - name: Enviar Email
-        if: steps.install-dependencies.outcome == 'failure' || steps.test.outcome == 'failure' || steps.build.outcome == 'failure' || steps.create_release.outcome == 'failure'
+        if: steps.test.outcome == 'failure'
         uses: hilarion5/send-mail@v1
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
+          smtp-server: smtp.gmail.com
+          smtp-port: 465
+          smtp-secure: true
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: Falha no Pipeline de CI/CD - ${{ github.repository }} - ${{ github.run_id }}
-          to: julio_soares_mendes@hotmail.com
-          from: b4r7y@hotmail.com
+          to-email: julio_soares_mendes@hotmail.com
+          from-email: ${{ secrets.MAIL_USERNAME }}
           body: |
-            O pipeline de CI/CD falhou na etapa "${{ steps.failed[0].name }}".
-            Acesse o log para mais detalhes: ${{ runner.url }}/log/${{ github.run_id }}
+            Olá,
+
+            Ocorreu uma falha no pipeline de CI/CD do repositório ${{ github.repository }}.
+
+            Aqui estão alguns detalhes:
+
+            - ID da execução: ${{ github.run_id }}
+            - Ref do commit: ${{ github.ref }}
+            - SHA do commit: ${{ github.sha }}
+
+            Você pode visualizar mais detalhes sobre a falha acessando o log do pipeline: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Por favor, verifique o problema assim que possível.
+
+            Atenciosamente,
+            Julio Mendes
