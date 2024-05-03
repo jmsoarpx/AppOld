@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+   tags:
+    - 'v*'
 
 jobs:
   Continuos-Integration:
@@ -122,6 +124,10 @@ jobs:
             Atenciosamente,
             Julio Mendes
 
+      - name: Build project # This would actually build your project, using zip for an example artifact
+        run: |
+            zip -r site.zip .
+
       - name: Create Release
         id: create_release
         continue-on-error: true
@@ -129,8 +135,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release v${{ github.run_number }}
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
           body: |
             Release de ${{ github.ref_name }}
             - Testes: ${{ steps.test.outcome }}
@@ -172,8 +178,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artefato.zip
-          asset_name: artefato-v${{  github.run_number }}.zip
+          asset_path: ./site.zip
+          asset_name: site-v${{  github.run_number }}.zip
           asset_content_type: application/zip
 
       - name: Enviar Email
