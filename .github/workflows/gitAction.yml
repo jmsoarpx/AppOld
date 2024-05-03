@@ -27,13 +27,14 @@ jobs:
         if: steps.test.outcome == 'failure'
         uses: hilarion5/send-mail@v1
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
+          smtp-server: smtp.gmail.com
+          smtp-port: 465
+          smtp-secure: true
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: Falha no Pipeline de CI/CD - ${{ github.repository }} - ${{ github.run_id }}
-          to: julio_soares_mendes@hotmail.com
-          from: b4r7y@hotmail.com
+          to-email: julio_soares_mendes@hotmail.com
+          from-email: ${{ secrets.MAIL_USERNAME }}
           body: |
             O pipeline de CI/CD falhou na etapa "${{ steps.failed[0].name }}".
             Acesse o log para mais detalhes: ${{ runner.url }}/log/${{ github.run_id }}
