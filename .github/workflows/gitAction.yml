@@ -20,7 +20,7 @@ jobs:
 
       - name: Execute tests
         continue-on-error: true
-        id: test
+        id: testes
         run: npm run test
 
       - name: Execute build
