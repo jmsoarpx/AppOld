@@ -26,7 +26,8 @@ jobs:
         id: build
         run: npm run start
 
-      - name: Create Release and Aprove
+      - name: Criar Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -34,7 +35,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
-          prerelease: false
+          prerelease: fals
 
       - name: Enviar Email
         if: steps.build.outcome == 'failure'
