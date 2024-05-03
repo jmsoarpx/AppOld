@@ -24,7 +24,7 @@ jobs:
       - name: Execute build
         continue-on-error: true
         id: build
-        run: npm run build
+        run: npm run start
 
       - name: Create Release and Aprove
         uses: actions/create-release@v1

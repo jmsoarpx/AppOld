@@ -10,8 +10,7 @@
     "teste:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
     "teste:ci": "npm test -- --coverage ",
-    "prepare": "husky install",
-    "build": "tsc"
+    "prepare": "husky install"
   },
   "standard": {
     "env": [
